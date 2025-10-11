@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yash Yadav | Full Stack Developer</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Poppins", sans-serif; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: linear-gradient(135deg, #060018, #001f3f, #120050);
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    /* Navbar */
+    nav {
+      width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(10px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 10%;
+      z-index: 100;
+      transition: 0.3s;
+    }
+    nav .logo {
+      font-size: 1.6rem;
+      font-weight: bold;
+      color: #00c6ff;
+      letter-spacing: 1px;
+    }
+    nav ul { display: flex; list-style: none; gap: 25px; }
+    nav ul li a {
+      color: #cfd8dc;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: .3s;
+    }
+    nav ul li a:hover { color: #00c6ff; text-shadow: 0 0 10px #00c6ff; }
+    .btn-talk {
+      background: #00c6ff;
+      color: #000;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: .3s;
+    }
+    .btn-talk:hover {
+      background: #0072ff;
+      color: #fff;
+      box-shadow: 0 0 15px #00c6ff;
+    }
+
+    /* Hamburger */
+    .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 5px; z-index: 300; }
+    .hamburger div { width: 25px; height: 3px; background: #00c6ff; border-radius: 2px; transition: .4s; }
+
+    /* Sidebar */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 75%;
+      height: 100vh;
+      background: rgba(0, 0, 0, .95);
+      backdrop-filter: blur(10px);
+      transition: .4s ease;
+      z-index: 200;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 80px;
+      text-align: center;
+    }
+    .sidebar.active { right: 0; }
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 25px;
+      font-size: 2rem;
+      color: #00c6ff;
+      cursor: pointer;
+    }
+    .sidebar ul { list-style: none; padding: 0; }
+    .sidebar ul li { margin: 25px 0; }
+    .sidebar ul li a {
+      color: #cfd8dc;
+      font-size: 1.4rem;
+      text-decoration: none;
+      transition: .3s;
+    }
+    .sidebar ul li a:hover { color: #00c6ff; text-shadow: 0 0 10px #00c6ff; }
+
+    /* Hero */
+    .hero {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      min-height: 100vh;
+      padding: 100px 10% 0;
+      gap: 50px;
+      flex-wrap: wrap;
+    }
+    .hero-text { max-width: 600px; animation: fadeInUp 1.5s ease; }
+    .hero-text h1 { font-size: 2.8rem; line-height: 1.3; }
+    .hero-text span { color: #00c6ff; font-weight: 700; }
+    .hero-text p { margin-top: 15px; color: #cfd8dc; line-height: 1.6; font-size: 1.1rem; }
+    .hero-buttons { margin-top: 30px; }
+    .hero-buttons a {
+      text-decoration: none;
+      padding: 10px 22px;
+      margin-right: 15px;
+      border-radius: 30px;
+      font-weight: 600;
+      transition: .3s;
+    }
+    .btn-primary { background: #00c6ff; color: #000; }
+    .btn-primary:hover { box-shadow: 0 0 20px #00c6ff; }
+    .btn-outline {
+      border: 2px solid #00c6ff;
+      color: #00c6ff;
+    }
+    .btn-outline:hover {
+      background: #00c6ff;
+      color: #000;
+      box-shadow: 0 0 20px #00c6ff;
+    }
+    .hero-img img {
+      width: 360px;
+      border-radius: 50%;
+      border: 4px solid #00c6ff;
+      box-shadow: 0 0 25px #00c6ff;
+      animation: floatImg 3s ease-in-out infinite;
+      max-width: 100%;
+    }
+
+    @keyframes floatImg { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-15px);} }
+    @keyframes fadeInUp { from{opacity:0;transform:translateY(30px);} to{opacity:1;transform:translateY(0);} }
+
+    /* Skills */
+    .skills {
+      padding: 80px 10%;
+      background: #0e1a2b;
+      text-align: center;
+    }
+    .skills h2 { color: #00c6ff; font-size: 2rem; margin-bottom: 40px; }
+    .skill-container {
+      display: flex;
+      overflow-x: auto;
+      gap: 20px;
+      scroll-snap-type: x mandatory;
+      padding-bottom: 15px;
+    }
+    .skill-card {
+      background: #111a33;
+      border: 1px solid #00c6ff;
+      border-radius: 15px;
+      width: 180px;
+      padding: 20px;
+      flex: 0 0 auto;
+      text-align: center;
+      transition: .4s;
+      scroll-snap-align: center;
+    }
+    .skill-card:hover { transform: translateY(-10px); box-shadow: 0 0 20px #00c6ff; }
+    .skill-card img { width: 45px; margin-bottom: 10px; }
+
+    /* Projects */
+    .projects {
+      padding: 80px 10%;
+      background: #081428;
+      text-align: center;
+    }
+    .projects h2 { color: #00c6ff; font-size: 2rem; margin-bottom: 40px; }
+    .project-container {
+      display: flex;
+      overflow-x: auto;
+      gap: 25px;
+      scroll-snap-type: x mandatory;
+    }
+    .project-card {
+      background: #111a33;
+      border: 1px solid #00c6ff;
+      border-radius: 15px;
+      width: 300px;
+      padding: 20px;
+      flex: 0 0 auto;
+      text-align: left;
+      transition: .4s;
+      scroll-snap-align: center;
+    }
+    .project-card:hover { transform: translateY(-10px); box-shadow: 0 0 20px #00c6ff; }
+    .project-card h3 { color: #00c6ff; margin-bottom: 10px; }
+    .project-card p { color: #cfd8dc; font-size: .95rem; line-height: 1.5; }
+    .project-card a { display: inline-block; margin-top: 10px; color: #00c6ff; text-decoration: none; font-weight: 600; }
+
+    /* Contact */
+    .contact {
+      padding: 80px 10%;
+      background: #060018;
+      text-align: center;
+    }
+    .contact h2 {
+      color: #00c6ff;
+      font-size: 2rem;
+      margin-bottom: 40px;
+    }
+    .contact form {
+      max-width: 500px;
+      margin: auto;
+      background: rgba(255,255,255,0.05);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 25px rgba(0,198,255,0.2);
+    }
+    .contact input, .contact textarea {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 10px;
+      outline: none;
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+      font-size: 1rem;
+    }
+    .contact button {
+      background: #00c6ff;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 25px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: .3s;
+    }
+    .contact button:hover {
+      background: #0072ff;
+      box-shadow: 0 0 20px #00c6ff;
+      color: #fff;
+    }
+
+    footer {
+      background: #000;
+      padding: 20px;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #777;
+    }
+
+    @media(max-width:900px){
+      nav ul, .btn-talk { display:none; }
+      .hamburger { display:flex; }
+      .hero { flex-direction:column-reverse; text-align:center; gap:30px; }
+      .hero-text h1 { font-size:2.2rem; }
+      .hero-img img { width:280px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <div class="logo">Yash<span style="color:#fff;">Yadav</span></div>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#contact" class="btn-talk">Let’s Talk</a>
+    <div class="hamburger" id="hamburger"><div></div><div></div><div></div></div>
+  </nav>
+
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+    <div class="close-btn" id="closeBtn">×</div>
+    <ul>
+      <li><a href="#home" onclick="closeMenu()">Home</a></li>
+      <li><a href="#skills" onclick="closeMenu()">Skills</a></li>
+      <li><a href="#projects" onclick="closeMenu()">Projects</a></li>
+      <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
+    </ul>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <div class="hero-text">
+      <h1>Hi, I'm <span>Yash Yadav</span> 👋</h1>
+      <p>Full Stack Developer from Indore. I build secure and powerful web apps using React, Node.js, MySQL, and Java.</p>
+      <div class="hero-buttons">
+        <a href="#projects" class="btn-primary">See Projects</a>
+        <a href="#contact" class="btn-outline">Hire Me</a>
+      </div>
+    </div>
+    <div class="hero-img">
+      <img src="WhatsApp Image 2025-10-08 at 18.01.46_940a0b99.jpg" alt="Profile" />
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section class="skills" id="skills">
+    <h2>My Technical Skills</h2>
+    <div class="skill-container">
+      <div class="skill-card"><img src="https://cdn-icons-png.flaticon.com/512/732/732212.png"><h3>HTML</h3></div>
+      <div class="skill-card"><img src="https://cdn-icons-png.flaticon.com/512/732/732190.png"><h3>CSS</h3></div>
+      <div class="skill-card"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968292.png"><h3>JavaScript</h3></div>
+      <div class="skill-card"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968672.png"><h3>Bootstrap</h3></div>
+      <div class="skill-card"><img src="https://cdn-icons-png.flaticon.com/512/1126/1126012.png"><h3>React</h3></div>
+      <div class="skill-card"><img src="https://cdn-icons-png.flaticon.com/512/919/919825.png"><h3>Node.js</h3></div>
+      <div class="skill-card"><img src="https://cdn-icons-png.flaticon.com/512/919/919825.png"><h3>Express</h3></div>
+      <div class="skill-card"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968322.png"><h3>MySQL</h3></div>
+      <div class="skill-card"><img src="https://cdn-icons-png.flaticon.com/512/5969/5969059.png"><h3>MongoDB</h3></div>
+      <div class="skill-card"><img src="https://cdn-icons-png.flaticon.com/512/226/226777.png"><h3>Java</h3></div>
+      <div class="skill-card"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111288.png"><h3>Git</h3></div>
+      <div class="skill-card"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968875.png"><h3>Firebase</h3></div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section class="projects" id="projects">
+    <h2>My Projects</h2>
+    <div class="project-container">
+      <div class="project-card">
+        <h3>Zenvora E-Commerce</h3>
+        <p>Custom print product store built with React, Node.js, and MySQL — includes login, cart, checkout, and admin dashboard.</p>
+        <a href="#">View Project →</a>
+      </div>
+      <div class="project-card">
+        <h3>Amazon Clone</h3>
+        <p>E-commerce clone with dynamic product pages, cart system, and real-time Firebase authentication using ReactJS.</p>
+        <a href="#">View Project →</a>
+      </div>
+      <div class="project-card">
+        <h3>Portfolio Website</h3>
+        <p>Responsive portfolio built using HTML, CSS, and JavaScript with smooth animations and mobile optimization.</p>
+        <a href="#">View Project →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="contact" id="contact">
+    <h2>Message Me</h2>
+    <form>
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea rows="5" placeholder="Your Message..." required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <footer>© 2025 Yash Yadav | Godawari Web Technologies</footer>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const sidebar = document.getElementById('sidebar');
+    const closeBtn = document.getElementById('closeBtn');
+    hamburger.addEventListener('click', () => sidebar.classList.add('active'));
+    closeBtn.addEventListener('click', () => sidebar.classList.remove('active'));
+    function closeMenu(){ sidebar.classList.remove('active'); }
+  </script>
+
+</body>
+</html>

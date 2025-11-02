@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Navbar</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background-color: #0f1d4a;
+      color: white;
+    }
+
+    /* Navbar */
+    nav {
+      width: 100%;
+      background: #0f1d4a;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 8%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 100;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .logo {
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+
+    .logo span {
+      color: #00aaff;
+    }
+
+    ul.nav-links {
+      display: flex;
+      align-items: center;
+      list-style: none;
+      gap: 30px;
+    }
+
+    ul.nav-links li a {
+      text-decoration: none;
+      color: #fff;
+      font-weight: 400;
+      transition: 0.3s;
+    }
+
+    ul.nav-links li a:hover {
+      color: #00aaff;
+    }
+
+    .icons {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .icons i {
+      color: #fff;
+      font-size: 1.3rem;
+      transition: 0.3s;
+    }
+
+    .icons i:hover {
+      color: #00aaff;
+    }
+
+    .menu-btn {
+      display: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
+
+    /* Sidebar (mobile) */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 250px;
+      height: 100%;
+      background: #101a3e;
+      transition: 0.4s ease;
+      padding: 60px 20px;
+      z-index: 999;
+    }
+
+    .sidebar.active {
+      right: 0;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+
+    .sidebar ul li a {
+      text-decoration: none;
+      color: #fff;
+      font-size: 1.1rem;
+      transition: 0.3s;
+    }
+
+    .sidebar ul li a:hover {
+      color: #00aaff;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 25px;
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: #fff;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      ul.nav-links, .icons {
+        display: none;
+      }
+
+      .menu-btn {
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">
+      &lt; <span>Anand</span> / Chowbey &gt;
+    </div>
+
+    <ul class="nav-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Work</a></li>
+      <li><a href="#">Services</a></li>
+      <li><a href="#">Blogs</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+
+    <div class="icons">
+      <a href="#"><i class="fab fa-github"></i></a>
+      <a href="#"><i class="fab fa-linkedin"></i></a>
+    </div>
+
+    <div class="menu-btn" onclick="openSidebar()">
+      <i class="fas fa-bars"></i>
+    </div>
+  </nav>
+
+  <div class="sidebar" id="sidebar">
+    <div class="close-btn" onclick="closeSidebar()">
+      <i class="fas fa-times"></i>
+    </div>
+
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Work</a></li>
+      <li><a href="#">Services</a></li>
+      <li><a href="#">Blogs</a></li>
+      <li><a href="#">Contact</a></li>
+      <li style="margin-top:20px;">
+        <a href="#"><i class="fab fa-github"></i> GitHub</a><br>
+        <a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a>
+      </li>
+    </ul>
+  </div>
+
+  <script>
+    function openSidebar() {
+      document.getElementById("sidebar").classList.add("active");
+    }
+
+    function closeSidebar() {
+      document.getElementById("sidebar").classList.remove("active");
+    }
+  </script>
+
+</body>
+</html>

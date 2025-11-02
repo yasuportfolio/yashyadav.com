@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio | Yash Yadav</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background: #0a1d3a;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 10%;
+      background: #122659;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 0 10px #0003;
+    }
+
+    header h1 {
+      font-size: 1.3rem;
+      color: #fff;
+      font-weight: 600;
+    }
+
+    header h1 span {
+      color: #2196f3;
+    }
+
+    nav {
+      display: flex;
+      gap: 25px;
+      align-items: center;
+    }
+
+    nav a {
+      color: #e0e6f3;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #00e5ff;
+    }
+
+    .nav-icons {
+      display: flex;
+      gap: 15px;
+      margin-left: 15px;
+    }
+
+    .nav-icons a {
+      color: #e0e6f3;
+      font-size: 1.3rem;
+      transition: 0.3s;
+    }
+
+    .nav-icons a:hover {
+      color: #00e5ff;
+      transform: scale(1.1);
+    }
+
+    /* Hamburger */
+    .menu-icon {
+      display: none;
+      font-size: 1.8rem;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      right: -260px;
+      width: 250px;
+      height: 100vh;
+      background: #081632;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 25px;
+      transition: 0.4s ease;
+      z-index: 200;
+    }
+
+    .sidebar.active {
+      right: 0;
+    }
+
+    .sidebar a {
+      color: #fff;
+      font-size: 1.1rem;
+      text-decoration: none;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 25px;
+      font-size: 2rem;
+      cursor: pointer;
+      color: #fff;
+    }
+
+    /* ===== HERO SECTION ===== */
+    .hero {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 100px 10%;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .hero-text {
+      flex: 1 1 400px;
+    }
+
+    .hero-text h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+
+    .hero-text h2 {
+      font-size: 1.8rem;
+      color: #00e5ff;
+      margin-bottom: 20px;
+    }
+
+    .hero-text p {
+      font-size: 1rem;
+      color: #cfd8e3;
+      line-height: 1.7;
+      margin-bottom: 30px;
+      max-width: 550px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 20px;
+    }
+
+    .hero-buttons a {
+      background: #1e88e5;
+      padding: 10px 25px;
+      border-radius: 25px;
+      color: #fff;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .hero-buttons a:hover {
+      background: #00e5ff;
+      color: #0a1d3a;
+    }
+
+    .hero-img {
+      flex: 1 1 300px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .hero-img img {
+      width: 280px;
+      border-radius: 15px;
+      box-shadow: 0 0 30px #00e5ff55;
+      transition: 0.3s;
+    }
+
+    .hero-img img:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 40px #00e5ffaa;
+    }
+
+    /* ===== STATS SECTION ===== */
+    .stats-section {
+      text-align: center;
+      padding: 70px 10%;
+      background: #0a1d3a;
+    }
+
+    .stats-container {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 60px;
+      padding: 30px 80px;
+      border: 1px solid #1e2d50;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.03);
+      box-shadow: 0 0 25px #00e5ff22;
+    }
+
+    .stat-box h2 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .stat-box p {
+      color: #a8b9d8;
+      font-size: 1rem;
+    }
+
+    .divider {
+      width: 1px;
+      height: 60px;
+      background: #304366;
+    }
+
+    /* ===== WORKED WITH ===== */
+    .worked-with {
+      text-align: center;
+      padding: 80px 10%;
+      background: #0a1d3a;
+    }
+
+    .worked-with h2 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .underline {
+      width: 100px;
+      height: 3px;
+      background: linear-gradient(90deg, #00e5ff, #b400ff);
+      margin: 10px auto 20px;
+    }
+
+    .worked-with p {
+      color: #a8b9d8;
+      margin-bottom: 40px;
+    }
+
+    /* Logo Slider */
+    .logo-slider {
+      position: relative;
+      overflow: hidden;
+      height: 120px;
+      width: 100%;
+    }
+
+    .logo-slider::before,
+    .logo-slider::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      width: 150px;
+      height: 100%;
+      z-index: 2;
+    }
+
+    .logo-slider::before {
+      left: 0;
+      background: linear-gradient(to right, #0a1d3a 0%, transparent 100%);
+    }
+
+    .logo-slider::after {
+      right: 0;
+      background: linear-gradient(to left, #0a1d3a 0%, transparent 100%);
+    }
+
+    .slide-track {
+      display: flex;
+      align-items: center;
+      width: calc(180px * 9);
+      animation: scroll 25s linear infinite;
+    }
+
+    .slide-track img {
+      width: 100px;
+      height: 100px;
+      margin: 0 25px;
+      border-radius: 10px;
+      background: #fff;
+      object-fit: contain;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .slide-track img:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px #00e5ff55;
+    }
+
+    @keyframes scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 768px) {
+      nav { display: none; }
+      .menu-icon { display: block; }
+      .stats-container { flex-direction: column; gap: 20px; padding: 30px; }
+      .divider { display: none; }
+      .slide-track { animation-duration: 35s; }
+      .slide-track img { width: 80px; height: 80px; margin: 0 15px; }
+
+      /* ✅ Hide Internship box on mobile */
+      .stats-container .stat-box:first-child {
+        display: none;
+      }
+    }
+
+    .skills-section {
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    .skills-section h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      background: linear-gradient(90deg, #00c6ff, #ad00ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .skills-section p {
+      font-size: 1.1rem;
+      color: #b0b8d1;
+      margin-bottom: 50px;
+    }
+
+    .category {
+      margin-bottom: 60px;
+      text-align: left;
+      max-width: 1200px;
+      margin: 0 auto 60px;
+    }
+
+    .category h3 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      margin-left: 15px;
+      border-bottom: 2px solid #9a4dff;
+      display: inline-block;
+      padding-bottom: 5px;
+    }
+
+    /* Scroll container */
+    .scroll-container {
+      overflow: hidden;
+      position: relative;
+      white-space: nowrap;
+      border-radius: 15px;
+      padding: 20px;
+      background-color: #13254d;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+
+    /* Inner scrolling row */
+    .scroll-content {
+      display: inline-flex;
+      animation: scroll 20s linear infinite;
+    }
+
+    /* Animation for continuous scrolling */
+    @keyframes scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .skill-card {
+      display: flex;
+      align-items: center;
+      background-color: #1a2e55;
+      border-radius: 12px;
+      padding: 10px 20px;
+      margin: 10px;
+      min-width: 160px;
+      font-size: 1rem;
+      color: white;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      transition: transform 0.3s ease;
+    }
+
+    .skill-card:hover {
+      transform: scale(1.1);
+      background-color: #20386b;
+    }
+
+    .skill-card img {
+      width: 30px;
+      height: 30px;
+      margin-right: 10px;
+    }
+.skills-section {
+  text-align: center;
+  padding: 60px 10%;
+}
+
+.skills-section h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #00c6ff, #ad00ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.7s ease;
+}
+
+.skills-section h2.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.skills-section p {
+  font-size: 1.1rem;
+  color: #b0b8d1;
+  margin-bottom: 50px;
+}
+
+.category {
+  margin-bottom: 60px;
+  text-align: left;
+  max-width: 1200px;
+  margin: 0 auto 60px;
+}
+
+.category h3 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  margin-left: 15px;
+  border-bottom: 2px solid #9a4dff;
+  display: inline-block;
+  padding-bottom: 5px;
+  color: #fff;
+}
+
+/* Scroll animation container */
+.scroll-container {
+  overflow: hidden;
+  position: relative;
+  border-radius: 15px;
+  padding: 20px;
+  background-color: #13254d;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+}
+
+.scroll-content {
+  display: inline-flex;
+  animation: scrollMove 22s linear infinite;
+}
+
+@keyframes scrollMove {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.skill-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #1b2f5a;
+  border-radius: 12px;
+  padding: 10px 20px;
+  margin: 10px;
+  min-width: 160px;
+  font-size: 1rem;
+  color: white;
+  box-shadow: 0 0 12px rgba(0,0,0,0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.skill-card:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 25px #00e5ff80;
+}
+
+.skill-card img {
+  width: 30px;
+  height: 30px;
+}
+
+/* Fade-in when visible */
+.scroll-container, .category h3 {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease;
+}
+
+.scroll-container.show, .category h3.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  .scroll-content {
+    animation-duration: 30s;
+  }
+  .skill-card {
+    min-width: 130px;
+    font-size: 0.9rem;
+  }
+}
+
+    .experience-section {
+      text-align: center;
+      padding: 60px 10%;
+    }
+
+    .experience-section h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      background: linear-gradient(90deg, #00c6ff, #ad00ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 10px;
+    }
+
+    .experience-section p {
+      color: #b0b8d1;
+      font-size: 1.05rem;
+      margin-bottom: 40px;
+    }
+
+    .experience-card {
+      background: #13254d;
+      border-radius: 15px;
+      padding: 25px;
+      margin: 0 auto;
+      max-width: 900px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      text-align: left;
+    }
+
+    .experience-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+
+    .logo-title {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .logo-title img {
+      width: 55px;
+      height: 55px;
+      border-radius: 10px;
+      background: #fff;
+      padding: 5px;
+    }
+
+    .logo-title h3 {
+      margin: 0;
+      font-size: 1.4rem;
+    }
+
+    .experience-company {
+      color: #b0b8d1;
+      font-size: 0.95rem;
+      margin-top: 4px;
+    }
+
+    .experience-header span {
+      color: #9a4dff;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .experience-details {
+      margin-top: 10px;
+      color: #d0d6eb;
+      line-height: 1.6;
+    }
+
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .tech-stack span {
+      background-color: #20315a;
+      border-radius: 20px;
+      padding: 6px 14px;
+      font-size: 0.85rem;
+      border: 1px solid #9a4dff;
+      transition: 0.3s;
+    }
+
+    .tech-stack span:hover {
+      background-color: #9a4dff;
+      box-shadow: 0 0 10px #9a4dff;
+    }
+
+    @media (max-width: 768px) {
+      .experience-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .experience-header span {
+        margin-top: 8px;
+      }
+    
+    .skills-section {
+  position: relative;
+  z-index: 5;
+  background: #071739; /* same background to blend */
+  padding: 80px 10%;
+}
+
+.scroll-container {
+  overflow: hidden;
+  position: relative;
+}
+
+.scroll-content {
+  display: flex;
+  gap: 20px;
+  animation: scrollLeft 25s linear infinite;
+}
+
+.skill-card {
+  background: #0e2253;
+  color: #fff;
+  padding: 12px 18px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.95rem;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.skill-card:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+}
+
+/* Skill icons */
+.skill-card img {
+  width: 28px;
+  height: 28px;
+}
+
+/* Scroll animation */
+@keyframes scrollLeft {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+}
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <h1>&lt; <span>Yash</span> / Yadav &gt;</h1>
+    <nav>
+      <a href="index .html">Home</a>
+      <a href="About.html">About</a>
+      <a href="project .html">Work</a>
+      <a href="Services.html">Services</a>
+      <a href="">Blogs</a>
+      <a href="contact.html">Contact</a>
+      <div class="nav-icons">
+        <a href="#"><i class="fab fa-github"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </nav>
+    <div class="menu-icon" id="menu"><i class="fas fa-bars"></i></div>
+  </header>
+
+  <!-- Sidebar Menu -->
+  <div class="sidebar" id="sidebar">
+    <div class="close-btn" id="close">&times;</div>
+    <a href="index .html">Home</a>
+    <a href="About.html">About</a>
+    <a href="project .html">Work</a>
+    <a href="Services.html">Services</a>
+    <a href="#">Blogs</a>
+    <a href="contact.html">Contact</a>
+  </div>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Hi, I'm <b>Yash Yadav</b></h1>
+      <h2>Full Stack Developer</h2>
+      <p>
+        Passionate about crafting seamless web experiences using modern front-end and back-end technologies.
+        I love turning ideas into functional, high-performance digital products.
+      </p>
+      <div class="hero-buttons">
+        <a href="#">View Resume</a>
+        <a href="#">Get in Touch</a>
+      </div>
+    </div>
+    <div class="hero-img">
+      <img src="yash.jpg" alt="Yash Yadav">
+    </div>
+  </section>
+
+  
+
+  <!-- WORKED WITH -->
+  <section class="worked-with">
+    <h2>WORKED WITH</h2>
+    <div class="underline"></div>
+    <p>Brands and clients I’ve collaborated with to create amazing products.</p>
+    <div class="logo-slider">
+      <div class="slide-track">
+        <img src="https://alsoltech.com/static/media/LOGO-light.fc243306f6d8eaaadf77.png" alt="Brand 1">
+        <img src="https://gopotu.com/wp-content/uploads/2023/08/gopotu-123-300x300.webp" alt="Brand 2">
+        <img src="https://images.squarespace-cdn.com/content/v1/665710ce40794d064f41678f/3246e52b-680f-4614-bb92-1fbd77e531f2/1000020819.png?format=1500w" alt="Brand 3">
+        <img src="https://alsoltech.com/static/media/LOGO-light.fc243306f6d8eaaadf77.png" alt="Brand 4">
+   <img src="https://alsoltech.com/static/media/LOGO-light.fc243306f6d8eaaadf77.png" alt="Brand 1">
+        <img src="https://gopotu.com/wp-content/uploads/2023/08/gopotu-123-300x300.webp" alt="Brand 2">
+        <img src="https://images.squarespace-cdn.com/content/v1/665710ce40794d064f41678f/3246e52b-680f-4614-bb92-1fbd77e531f2/1000020819.png?format=1500w" alt="Brand 3">
+        <img src="https://alsoltech.com/static/media/LOGO-light.fc243306f6d8eaaadf77.png" alt="Brand 4">
+  
+      </div>
+    </div>
+  </section>
+
+ 
+
+  <section class="skills-section">
+    <h2>Skills</h2>
+    <p>A collection of my technical skills and expertise honed through various projects</p>
+
+    <!-- Frontend Section -->
+    <div class="category">
+      <h3>Frontend</h3>
+      <div class="scroll-container">
+        <div class="scroll-content">
+          <div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg"> Flutter</div>
+          <div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/materialui/materialui-original.svg"> Material UI</div>
+          <div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"> React JS</div>
+          <div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg"> Redux</div>
+          <div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"> JavaScript</div>
+          <div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg"> Bootstrap</div>
+          <div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg"> HTML</div>
+          <div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg"> CSS</div>
+          <div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg"> Tailwind CSS</div>
+          <div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"> Framer Motion</div>
+
+          <!-- Duplicate for smooth infinite scroll -->
+          <div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg"> Flutter</div>
+          <div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/materialui/materialui-original.svg"> Material UI</div>
+          <div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"> React JS</div>
+          <div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg"> Redux</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Backend Section -->
+    <div class="category">
+      <h3>Backend</h3>
+      <div class="scroll-container">
+        <div class="scroll-content">
+          <div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"> Node JS</div>
+          <div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg"> Express JS</div>
+          <div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg"> MongoDB</div>
+          <div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"> MySQL</div>
+          <div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg"> Firebase</div>
+          <div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg"> PHP</div>
+          <div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"> JWT</div>
+          <div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg"> RestAPI</div>
+
+          <!-- Duplicate for smooth infinite scroll -->
+          <div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"> Node JS</div>
+          <div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg"> Express JS</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Languages -->
+  <div class="category">
+    <h3>Languages</h3>
+    <div class="scroll-container">
+      <div class="scroll-content">
+        <div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg"> Dart</div>
+        <div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg"> Java</div>
+        <div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"> Python</div>
+        <div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"> JavaScript</div>
+        <div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg"> PHP</div>
+        <div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg"> C</div>
+        <div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg"> C++</div>
+
+        <!-- Duplicate for seamless infinite scroll -->
+        <div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg"> Dart</div>
+        <div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg"> Java</div>
+        <div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"> Python</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tools -->
+  <div class="category">
+    <h3>Tools</h3>
+    <div class="scroll-container">
+      <div class="scroll-content">
+        <div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/androidstudio/androidstudio-original.svg"> Android Studio</div>
+        <div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"> GitHub</div>
+        <div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg"> VS Code</div>
+        <div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg"> Postman</div>
+        <div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg"> Compass</div>
+        <div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg"> Vercel</div>
+        <div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/netlify/netlify-original.svg"> Netlify</div>
+        <div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg"> Figma</div>
+
+        <!-- Duplicate for loop -->
+        <div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/androidstudio/androidstudio-original.svg"> Android Studio</div>
+        <div class="skill-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"> GitHub</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="experience-section">
+    <h2>Experience</h2>
+    <p>A collection of my work experience and roles in different organizations.</p>
+
+    <div class="experience-card">
+      <div class="experience-header">
+        <div class="logo-title">
+          <img src="https://cdn-icons-png.flaticon.com/512/226/226777.png" alt="Java Logo">
+          <div>
+            <h3>Java Developer</h3>
+            <div class="experience-company">TechNova Solutions</div>
+          </div>
+        </div>
+        <span>Jan 2023 - Oct 2023</span>
+      </div>
+
+      <div class="experience-details">
+        Developed and maintained backend systems using Java and Spring Boot.  
+        Designed RESTful APIs, handled MySQL databases, and improved overall performance.  
+        Worked closely with the front-end team to ensure smooth integration and delivery.
+      </div>
+
+      <div class="tech-stack">
+        <span>Java</span>
+        <span>Spring Boot</span>
+        <span>REST API</span>
+        <span>MySQL</span>
+        <span>Postman</span>
+        <span>Git</span>
+      </div>
+    </div>
+  </section>
+
+  
+  <script>
+    const menu = document.getElementById('menu');
+    const sidebar = document.getElementById('sidebar');
+    const closeBtn = document.getElementById('close');
+
+    menu.addEventListener('click', () => sidebar.classList.add('active'));
+    closeBtn.addEventListener('click', () => sidebar.classList.remove('active'));
+    const elements = document.querySelectorAll('.scroll-container, .skills-section h2, .category h3');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('show');
+  });
+}, { threshold: 0.2 });
+
+elements.forEach(el => observer.observe(el));
+
+  </script>
+
+</body>
+</html>
